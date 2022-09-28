@@ -6,9 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/product_model.dart';
 import '../../blocs/category_bloc/category_bloc.dart';
+import '../../blocs/product_bloc/product_bloc.dart';
 import '../components/custom_app_bar.dart';
 import '../components/custom_bottom_app_bar.dart';
-import '../components/product_card.dart';
 import '../components/product_carousel.dart';
 import '../components/section_tile.dart';
 
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => HomePage(),
+      builder: (_) => const HomePage(),
     );
   }
 
@@ -69,10 +69,25 @@ class HomePage extends StatelessWidget {
 
             // ListView Product
 
-            ProductCarousel(
-              products: Product.products
-                  .where((product) => product.isRecommended)
-                  .toList(),
+            BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                if (state is ProductLoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is ProductLoadedState) {
+                  return ProductCarousel(
+                    products: state.products
+                        .where((product) => product.isRecommended)
+                        .toList(),
+                  );
+                } else {
+                  return const Center(
+                    child: Text(
+                        "Algo deu muito errado ao puxar as imagens do Firebase"),
+                  );
+                }
+              },
             ),
             const SectionTitle(
               title: "Mais Populares",
@@ -80,11 +95,26 @@ class HomePage extends StatelessWidget {
 
             // ListView Product
 
-            ProductCarousel(
-              products: Product.products
-                  .where((product) => product.isPopular)
-                  .toList(),
-            )
+            BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                if (state is ProductLoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is ProductLoadedState) {
+                  return ProductCarousel(
+                    products: state.products
+                        .where((product) => product.isPopular)
+                        .toList(),
+                  );
+                } else {
+                  return const Center(
+                    child: Text(
+                        "Algo deu muito errado ao puxar as imagens do Firebase"),
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),

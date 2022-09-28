@@ -29,7 +29,7 @@ class FavoritesPage extends StatelessWidget {
       body: BlocBuilder<FavoritesBloc, FavoritesState>(
         builder: (context, state) {
           if (state is FavoritesLoadingState) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state is FavoritesLoadedState) {
@@ -44,14 +44,12 @@ class FavoritesPage extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: state.favorite.products.length,
                 itemBuilder: (context, index) {
-                  return SingleChildScrollView(
-                    child: SizedBox(
-                      height: 50,
-                      child: Center(
-                        child: ProductCard(
-                          product: state.favorite.products[index],
-                          widthSelect: 2.2,
-                        ),
+                  return SizedBox(
+                    height: 50,
+                    child: Center(
+                      child: ProductCard(
+                        product: state.favorite.products[index],
+                        widthSelect: 2.2,
                       ),
                     ),
                   );

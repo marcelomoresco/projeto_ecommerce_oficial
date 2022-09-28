@@ -1,7 +1,12 @@
+import 'package:e_commerce_project_new/infra/repositories/checkout/checkout_repository.dart';
+import 'package:e_commerce_project_new/infra/repositories/product/product_repository.dart';
 import 'package:e_commerce_project_new/presentator/blocs/cart_bloc/cart_bloc.dart';
+import 'package:e_commerce_project_new/presentator/blocs/checkout_bloc/checkout_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/favorites_bloc/favorites_bloc.dart';
+import 'package:e_commerce_project_new/presentator/blocs/product_bloc/product_bloc.dart';
 import 'package:e_commerce_project_new/presentator/views/home/home_page.dart';
 import 'package:e_commerce_project_new/presentator/views/routes/app_routes.dart';
+import 'package:e_commerce_project_new/presentator/views/splash/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,11 +43,23 @@ class MyApp extends StatelessWidget {
               LoadCategoriesEvent(),
             ),
         ),
+        BlocProvider<ProductBloc>(
+          create: (_) => ProductBloc(
+            productRepository: ProductRepository(),
+          )..add(
+              LoadProductsEvent(),
+            ),
+        ),
+        BlocProvider<CheckoutBloc>(
+          create: (_) => CheckoutBloc(
+              cartBloc: context.read<CartBloc>(),
+              checkoutRepository: CheckoutRepository()),
+        ),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRoutes.onGenerate,
-        initialRoute: HomePage.routeName,
+        initialRoute: SplashPage.routeName,
       ),
     );
   }
