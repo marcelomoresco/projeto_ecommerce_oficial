@@ -39,6 +39,8 @@ dependencies:
   carousel_slider: ^4.1.1
   equatable: ^2.0.5
   cloud_firestore: ^3.4.9
+  firebase_core:
+  firebase_auth:
   flutter_bloc: ^8.1.1
 
 dev_dependencies:
