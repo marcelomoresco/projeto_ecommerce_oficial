@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
             ),
         ),
         BlocProvider<CheckoutBloc>(
-          create: (_) => CheckoutBloc(
+          create: (context) => CheckoutBloc(
               cartBloc: context.read<CartBloc>(),
               checkoutRepository: CheckoutRepository()),
         ),
