@@ -9,6 +9,7 @@ abstract class CategoryEvent extends Equatable {
 
 class LoadCategoriesEvent extends CategoryEvent {}
 
+//Check as categorias e mostrar
 class UpdateCategoriesEvent extends CategoryEvent {
   final List<Category> categories;
 

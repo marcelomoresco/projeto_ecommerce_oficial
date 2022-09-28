@@ -2,8 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_project_new/domain/entities/category_model.dart';
 import 'package:e_commerce_project_new/presentator/views/components/hero_carousel_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/product_model.dart';
+import '../../blocs/category_bloc/category_bloc.dart';
 import '../components/custom_app_bar.dart';
 import '../components/custom_bottom_app_bar.dart';
 import '../components/product_card.dart';
@@ -32,19 +34,31 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  aspectRatio: 1.5,
-                  viewportFraction: 0.9,
-                  enlargeCenterPage: true,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height,
-                  autoPlay: true,
-                ),
-                items: Category.categories
-                    .map((category) => HeroCarouselCard(category: category))
-                    .toList(),
-              ),
+            BlocBuilder<CategoryBloc, CategoryState>(
+              builder: (context, state) {
+                if (state is CategoryLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is CategoryLoaded) {
+                  return CarouselSlider(
+                    options: CarouselOptions(
+                      aspectRatio: 1.5,
+                      viewportFraction: 0.9,
+                      enlargeCenterPage: true,
+                      enlargeStrategy: CenterPageEnlargeStrategy.height,
+                      autoPlay: true,
+                    ),
+                    items: state.categories
+                        .map((category) => HeroCarouselCard(category: category))
+                        .toList(),
+                  );
+                } else {
+                  return const Center(
+                    child: Text("Algo deu muito errado.......!"),
+                  );
+                }
+              },
             ),
 
             //Recomendados

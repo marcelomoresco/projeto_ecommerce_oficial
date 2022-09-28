@@ -25,8 +25,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   ) {
     _categorySubscription?.cancel();
     _categorySubscription = _categoryRepository.getAllCategories().listen(
-          (products) => add(
-            UpdateCategoriesEvent(products),
+          (categories) => add(
+            UpdateCategoriesEvent(categories),
           ),
         );
   }

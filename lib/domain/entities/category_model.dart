@@ -16,31 +16,31 @@ class Category extends Equatable {
         imgUrl,
       ];
 
-  static Category fromSnapshot(DocumentSnapshot snap) {
+  static Category fromSnapshot(DocumentSnapshot snapshot) {
     Category category = Category(
-      name: snap['name'],
-      imgUrl: snap['imgUrl'],
+      name: snapshot['name'],
+      imgUrl: snapshot['imgUrl'],
     );
     return category;
   }
 
   static List<Category> categories = [
-    Category(
+    const Category(
       name: 'Frutas',
       imgUrl:
-          'https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80', //https://unsplash.com/photos/5lZhD2qQ2SE
+          'https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     ),
-    Category(
+    const Category(
       name: 'Vegetais',
       imgUrl:
-          'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80', //https://unsplash.com/photos/m741tj4Cz7M
+          'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80',
     ),
-    Category(
+    const Category(
       name: 'Açogue',
       imgUrl:
-          'https://images.unsplash.com/photo-1547637205-fde0c9011f9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80', //https://unsplash.com/photos/7Zlds3gm7NU
+          'https://images.unsplash.com/photo-1547637205-fde0c9011f9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     ),
-    Category(
+    const Category(
       name: 'Pães',
       imgUrl:
           'https://blog.praticabr.com/wp-content/uploads/2019/01/263396-os-10-tipos-de-paes-que-voce-precisa-conhecer-1024x682.jpg',

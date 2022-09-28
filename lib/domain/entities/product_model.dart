@@ -18,14 +18,14 @@ class Product extends Equatable {
     required this.isPopular,
   });
 
-  static Product fromSnapshot(DocumentSnapshot snap) {
+  static Product fromSnapshot(DocumentSnapshot snapshot) {
     Product product = Product(
-      name: snap['name'],
-      category: snap['categorias'],
-      imageUrl: snap['imgUrl'],
-      price: snap['price'],
-      isRecommended: snap['isRecommended'],
-      isPopular: snap['isPopular'],
+      name: snapshot['name'],
+      category: snapshot['category'],
+      imageUrl: snapshot['imageUrl'],
+      price: snapshot['price'],
+      isRecommended: snapshot['isRecommended'],
+      isPopular: snapshot['isPopular'],
     );
     return product;
   }
@@ -45,7 +45,7 @@ class Product extends Equatable {
       name: 'Pão Sem Glútem #1',
       category: 'Pães',
       imageUrl:
-          'https://distribuicao.abad.com.br/wp-content/uploads/2022/02/wickbold-amendoim-450x300.jpg', //https://unsplash.com/photos/dO9A6mhSZZY
+          'https://distribuicao.abad.com.br/wp-content/uploads/2022/02/wickbold-amendoim-450x300.jpg',
       price: 12.99,
       isRecommended: true,
       isPopular: false,
