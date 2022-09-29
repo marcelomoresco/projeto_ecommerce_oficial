@@ -12,5 +12,6 @@ abstract class IBaseAuthRepository {
     required String email,
     required String password,
   });
+  Future<void> loginWithGoogle();
   Future<void> signOut();
 }

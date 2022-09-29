@@ -42,9 +42,32 @@ class LoginPage extends StatelessWidget {
                 context.read<LoginCubit>().loginWithEmailAndPassword();
               },
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            const GoogleLoginButton(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class GoogleLoginButton extends StatelessWidget {
+  const GoogleLoginButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.deepPurple,
+        shape: const RoundedRectangleBorder(),
+        fixedSize: const Size(200, 40),
+      ),
+      onPressed: () {
+        context.read<LoginCubit>().loginWithGoogle();
+      },
+      child: Text("Registrar com Google"),
     );
   }
 }
