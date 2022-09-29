@@ -1,3 +1,4 @@
+import 'package:e_commerce_project_new/presentator/views/components/search_box.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/entities/category_model.dart';
@@ -30,24 +31,30 @@ class CatalogPage extends StatelessWidget {
         title: category.name,
       ),
       bottomNavigationBar: const CustomBottomAppBar(),
-      body: GridView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 36),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 120,
-            childAspectRatio: 1,
-          ),
-          shrinkWrap: true,
-          itemCount: categoryProducts.length,
-          itemBuilder: (context, index) {
-            return SizedBox(
-              height: 310,
-              child: Center(
-                child: ProductCard(
-                    product: categoryProducts[index], widthSelect: 2.2),
+      body: Column(
+        children: [
+          SearchBox(category: category),
+          GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 36),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 120,
+                childAspectRatio: 1,
               ),
-            );
-          }),
+              shrinkWrap: true,
+              itemCount: categoryProducts.length,
+              itemBuilder: (context, index) {
+                return SizedBox(
+                  height: 310,
+                  child: Center(
+                    child: ProductCard(
+                        product: categoryProducts[index], widthSelect: 2.2),
+                  ),
+                );
+              }),
+        ],
+      ),
     );
   }
 }
