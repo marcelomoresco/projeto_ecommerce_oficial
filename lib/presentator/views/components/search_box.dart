@@ -56,17 +56,17 @@ class SearchBox extends StatelessWidget {
                     ? ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: Product.products.length,
+                        itemCount: state.products.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5.0),
                             child: ProductCard(
-                              product: Product.products[index],
+                              product: state.products[index],
                               widthSelect: 1.1,
                             ),
                           );
                         })
-                    : SizedBox()
+                    : const SizedBox()
               ],
             ),
           );
