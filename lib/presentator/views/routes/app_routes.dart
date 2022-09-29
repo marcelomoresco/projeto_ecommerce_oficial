@@ -1,6 +1,7 @@
 import 'package:e_commerce_project_new/presentator/views/cart_page/cart_page.dart';
 import 'package:e_commerce_project_new/presentator/views/favorites/favorites_page.dart';
 import 'package:e_commerce_project_new/presentator/views/home/home_page.dart';
+import 'package:e_commerce_project_new/presentator/views/profile/profile_page.dart';
 import 'package:e_commerce_project_new/presentator/views/splash/splash_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class AppRoutes {
     switch (settings.name) {
       case '/':
         return HomePage.route();
+      case ProfilePage.routeName:
+        return ProfilePage.route();
       case SplashPage.routeName:
         return SplashPage.route();
       case HomePage.routeName:
