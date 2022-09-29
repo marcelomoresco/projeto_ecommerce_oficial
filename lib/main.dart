@@ -9,8 +9,8 @@ import 'package:e_commerce_project_new/presentator/blocs/favorites_bloc/favorite
 import 'package:e_commerce_project_new/presentator/blocs/product_bloc/product_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/profile_bloc/profile_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/search_bloc/search_bloc.dart';
-import 'package:e_commerce_project_new/presentator/cubits/cubit/register_cubit.dart';
 import 'package:e_commerce_project_new/presentator/cubits/login_cubit/login_cubit.dart';
+import 'package:e_commerce_project_new/presentator/cubits/register_cubit/register_cubit.dart';
 import 'package:e_commerce_project_new/presentator/views/home/home_page.dart';
 import 'package:e_commerce_project_new/presentator/views/routes/app_routes.dart';
 import 'package:e_commerce_project_new/presentator/views/splash/splash_page.dart';

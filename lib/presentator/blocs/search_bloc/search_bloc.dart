@@ -30,23 +30,24 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         (_productBloc.state as ProductLoadedState).products;
 
     if (event.category != null) {
-      products = products
+      products = Product.products
           .where((product) => product.category == event.category!.name)
           .toList();
     }
 
     if (event.productName.isNotEmpty) {
-      List<Product> searchResults = products
+      List<Product> searchResults = Product.products
           .where(
             (product) => product.name.toLowerCase().startsWith(
                   event.productName.toLowerCase(),
                 ),
           )
           .toList();
+      print(searchResults);
 
       emit(SearchLoadedState(products: searchResults));
     } else {
-      emit(SearchLoadedState());
+      emit(const SearchLoadedState());
     }
   }
 

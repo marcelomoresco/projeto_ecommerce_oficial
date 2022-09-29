@@ -13,7 +13,7 @@ class SplashPage extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => SplashPage(),
+      builder: (context) => const SplashPage(),
     );
   }
 
@@ -26,22 +26,14 @@ class SplashPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+        children: const [
           Center(
-            child: Container(
-              height: 70,
-              width: 200,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25), color: Colors.white),
-              child: const Text(
-                "Bem-Vindo",
+            child: Text("Bem-Vindo",
                 style: TextStyle(
-                  color: Colors.deepPurple,
-                  fontSize: 25,
+                  color: Colors.white,
+                  fontSize: 27,
                   fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+                )),
           )
         ],
       ),
