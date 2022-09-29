@@ -52,7 +52,7 @@ class SearchBox extends StatelessWidget {
                     ),
                   ],
                 ),
-                Product.products.isNotEmpty
+                state.products.isNotEmpty
                     ? ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),

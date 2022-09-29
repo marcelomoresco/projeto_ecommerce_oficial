@@ -31,29 +31,31 @@ class CatalogPage extends StatelessWidget {
         title: category.name,
       ),
       bottomNavigationBar: const CustomBottomAppBar(),
-      body: Column(
-        children: [
-          SearchBox(category: category),
-          GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 36),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 120,
-                childAspectRatio: 1,
-              ),
-              shrinkWrap: true,
-              itemCount: categoryProducts.length,
-              itemBuilder: (context, index) {
-                return SizedBox(
-                  height: 310,
-                  child: Center(
-                    child: ProductCard(
-                        product: categoryProducts[index], widthSelect: 2.2),
-                  ),
-                );
-              }),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SearchBox(category: category),
+            GridView.builder(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 36),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 40,
+                  childAspectRatio: 1,
+                ),
+                shrinkWrap: true,
+                itemCount: categoryProducts.length,
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    height: 310,
+                    child: Center(
+                      child: ProductCard(
+                          product: categoryProducts[index], widthSelect: 2.2),
+                    ),
+                  );
+                }),
+          ],
+        ),
       ),
     );
   }

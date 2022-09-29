@@ -2,6 +2,7 @@ import 'package:e_commerce_project_new/presentator/views/cart_page/cart_page.dar
 import 'package:e_commerce_project_new/presentator/views/favorites/favorites_page.dart';
 import 'package:e_commerce_project_new/presentator/views/home/home_page.dart';
 import 'package:e_commerce_project_new/presentator/views/profile/profile_page.dart';
+import 'package:e_commerce_project_new/presentator/views/register/register_page.dart';
 import 'package:e_commerce_project_new/presentator/views/splash/splash_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/category_model.dart';
 import '../../../domain/entities/product_model.dart';
 import '../checkout/checkout_page.dart';
+import '../login/login_page.dart';
 import '../product/product_page.dart';
 import '../catalog/catalog_page.dart';
 
@@ -35,7 +37,10 @@ class AppRoutes {
         return CheckoutPage.route();
       case CatalogPage.routeName:
         return CatalogPage.route(category: settings.arguments as Category);
-
+      case RegisterPage.routeName:
+        return RegisterPage.route();
+      case LoginPage.routeName:
+        return LoginPage.route();
       default:
         return _errorRoute();
     }

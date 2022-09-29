@@ -2,13 +2,15 @@ import 'package:e_commerce_project_new/infra/repositories/auth/auth_repository_i
 import 'package:e_commerce_project_new/infra/repositories/checkout/checkout_repository.dart';
 import 'package:e_commerce_project_new/infra/repositories/product/product_repository.dart';
 import 'package:e_commerce_project_new/infra/repositories/user/user_repository_imp.dart';
+import 'package:e_commerce_project_new/presentator/blocs/auth_bloc/auth_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/checkout_bloc/checkout_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/favorites_bloc/favorites_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/product_bloc/product_bloc.dart';
+import 'package:e_commerce_project_new/presentator/blocs/profile_bloc/profile_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/search_bloc/search_bloc.dart';
+import 'package:e_commerce_project_new/presentator/cubits/cubit/register_cubit.dart';
 import 'package:e_commerce_project_new/presentator/cubits/login_cubit/login_cubit.dart';
-import 'package:e_commerce_project_new/presentator/cubits/register_cubit/register_cubit.dart';
 import 'package:e_commerce_project_new/presentator/views/home/home_page.dart';
 import 'package:e_commerce_project_new/presentator/views/routes/app_routes.dart';
 import 'package:e_commerce_project_new/presentator/views/splash/splash_page.dart';
@@ -85,7 +87,7 @@ class MyApp extends StatelessWidget {
             create: (context) => RegisterCubit(
               authRepository: context.read<AuthRepository>(),
             ),
-          )
+          ),
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,

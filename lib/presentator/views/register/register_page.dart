@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubits/register_cubit/register_cubit.dart';
+import '../../cubits/cubit/register_cubit.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -98,16 +98,6 @@ class RegisterPage extends StatelessWidget {
                   child: const Text("Registrar"),
                   onPressed: () {
                     context.read<RegisterCubit>().registerUser();
-                    const snackBar = SnackBar(
-                      backgroundColor: Colors.green,
-                      content: Text(
-                        "Usuário criado com Sucesso!",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                 ),
               ],
