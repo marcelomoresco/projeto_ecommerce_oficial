@@ -6,6 +6,7 @@ import 'package:e_commerce_project_new/presentator/blocs/cart_bloc/cart_bloc.dar
 import 'package:e_commerce_project_new/presentator/blocs/checkout_bloc/checkout_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/favorites_bloc/favorites_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/product_bloc/product_bloc.dart';
+import 'package:e_commerce_project_new/presentator/blocs/search_bloc/search_bloc.dart';
 import 'package:e_commerce_project_new/presentator/cubits/login_cubit/login_cubit.dart';
 import 'package:e_commerce_project_new/presentator/cubits/register_cubit/register_cubit.dart';
 import 'package:e_commerce_project_new/presentator/views/home/home_page.dart';
@@ -64,6 +65,11 @@ class MyApp extends StatelessWidget {
             )..add(
                 LoadProductsEvent(),
               ),
+          ),
+          BlocProvider<SearchBloc>(
+            create: (context) => SearchBloc(
+              productBloc: context.read<ProductBloc>(),
+            )..add(LoadSearchEvent()),
           ),
           BlocProvider<CheckoutBloc>(
             create: (context) => CheckoutBloc(
