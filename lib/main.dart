@@ -1,9 +1,13 @@
+import 'package:e_commerce_project_new/infra/repositories/auth/auth_repository_imp.dart';
 import 'package:e_commerce_project_new/infra/repositories/checkout/checkout_repository.dart';
 import 'package:e_commerce_project_new/infra/repositories/product/product_repository.dart';
+import 'package:e_commerce_project_new/infra/repositories/user/user_repository_imp.dart';
 import 'package:e_commerce_project_new/presentator/blocs/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/checkout_bloc/checkout_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/favorites_bloc/favorites_bloc.dart';
 import 'package:e_commerce_project_new/presentator/blocs/product_bloc/product_bloc.dart';
+import 'package:e_commerce_project_new/presentator/cubits/login_cubit/login_cubit.dart';
+import 'package:e_commerce_project_new/presentator/cubits/register_cubit/register_cubit.dart';
 import 'package:e_commerce_project_new/presentator/views/home/home_page.dart';
 import 'package:e_commerce_project_new/presentator/views/routes/app_routes.dart';
 import 'package:e_commerce_project_new/presentator/views/splash/splash_page.dart';
@@ -25,41 +29,63 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider<FavoritesBloc>(
-          create: (_) => FavoritesBloc()
-            ..add(
-              StartFavoriteEvent(),
-            ),
+        RepositoryProvider(
+          create: (context) => UserRepository(),
         ),
-        BlocProvider<CartBloc>(
-          create: (_) => CartBloc()..add(LoadCart()),
-        ),
-        BlocProvider<CategoryBloc>(
-          create: (_) => CategoryBloc(
-            categoryRepository: CategoryRepository(),
-          )..add(
-              LoadCategoriesEvent(),
-            ),
-        ),
-        BlocProvider<ProductBloc>(
-          create: (_) => ProductBloc(
-            productRepository: ProductRepository(),
-          )..add(
-              LoadProductsEvent(),
-            ),
-        ),
-        BlocProvider<CheckoutBloc>(
-          create: (context) => CheckoutBloc(
-              cartBloc: context.read<CartBloc>(),
-              checkoutRepository: CheckoutRepository()),
-        ),
+        RepositoryProvider(
+          create: (context) => AuthRepository(
+            userRepository: context.read<UserRepository>(),
+          ),
+        )
       ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: AppRoutes.onGenerate,
-        initialRoute: SplashPage.routeName,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<FavoritesBloc>(
+            create: (_) => FavoritesBloc()
+              ..add(
+                StartFavoriteEvent(),
+              ),
+          ),
+          BlocProvider<CartBloc>(
+            create: (_) => CartBloc()..add(LoadCart()),
+          ),
+          BlocProvider<CategoryBloc>(
+            create: (_) => CategoryBloc(
+              categoryRepository: CategoryRepository(),
+            )..add(
+                LoadCategoriesEvent(),
+              ),
+          ),
+          BlocProvider<ProductBloc>(
+            create: (_) => ProductBloc(
+              productRepository: ProductRepository(),
+            )..add(
+                LoadProductsEvent(),
+              ),
+          ),
+          BlocProvider<CheckoutBloc>(
+            create: (context) => CheckoutBloc(
+                cartBloc: context.read<CartBloc>(),
+                checkoutRepository: CheckoutRepository()),
+          ),
+          BlocProvider<LoginCubit>(
+            create: (context) => LoginCubit(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider<RegisterCubit>(
+            create: (context) => RegisterCubit(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          )
+        ],
+        child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: AppRoutes.onGenerate,
+          initialRoute: SplashPage.routeName,
+        ),
       ),
     );
   }

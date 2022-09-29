@@ -1,25 +1,35 @@
 import 'package:e_commerce_project_new/infra/repositories/auth/auth_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:e_commerce_project_new/infra/repositories/user/user_repository_imp.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+
+import '../../../domain/entities/user_model.dart';
 
 class AuthRepository extends IBaseAuthRepository {
-  final FirebaseAuth _firebaseAuth;
+  final auth.FirebaseAuth _firebaseAuth;
+  final UserRepository _userRepository;
 
-  AuthRepository({FirebaseAuth? firebaseAuth})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+  AuthRepository({
+    auth.FirebaseAuth? firebaseAuth,
+    required UserRepository userRepository,
+  })  : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance,
+        _userRepository = userRepository;
 
   @override
-  Future<User?> signUp({
-    required String email,
+  Future<auth.User?> signUp({
+    required User user,
     required String password,
   }) async {
     try {
-      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      final user = credential.user;
-      return user;
+      _firebaseAuth
+          .createUserWithEmailAndPassword(
+            email: user.email,
+            password: password,
+          )
+          .then(
+            (value) => _userRepository.createUser(
+              user.copyWith(id: value.user!.uid),
+            ),
+          );
     } catch (_) {}
   }
 
@@ -37,7 +47,7 @@ class AuthRepository extends IBaseAuthRepository {
   }
 
   @override
-  Stream<User?> get user => _firebaseAuth.userChanges();
+  Stream<auth.User?> get user => _firebaseAuth.userChanges();
 
   @override
   Future<void> signOut() async {

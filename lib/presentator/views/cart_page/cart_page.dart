@@ -64,57 +64,59 @@ class CartPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else if (state is CartLoadedState) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          Cart().freeDeliveryString,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed("/");
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.deepPurple,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
+              return SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            state.cart.freeDeliveryString,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
-                            child: Text("+ Produtos"))
-                      ],
-                    ),
-                    SizedBox(
-                      height: 400,
-                      child: ListView.builder(
-                        itemCount: state.cart
-                            .productQuantity(state.cart.products)
-                            .keys
-                            .length,
-                        itemBuilder: (context, index) {
-                          return CartProductCard(
-                              product: state.cart
-                                  .productQuantity(state.cart.products)
-                                  .keys
-                                  .elementAt(index),
-                              quantity: state.cart
-                                  .productQuantity(state.cart.products)
-                                  .values
-                                  .elementAt(index));
-                        },
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pushNamed("/");
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.deepPurple,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              ),
+                              child: Text("+ Produtos"))
+                        ],
                       ),
-                    ),
-                    const OrderResume(),
-                  ],
+                      SizedBox(
+                        height: 350,
+                        child: ListView.builder(
+                          itemCount: state.cart
+                              .productQuantity(state.cart.products)
+                              .keys
+                              .length,
+                          itemBuilder: (context, index) {
+                            return CartProductCard(
+                                product: state.cart
+                                    .productQuantity(state.cart.products)
+                                    .keys
+                                    .elementAt(index),
+                                quantity: state.cart
+                                    .productQuantity(state.cart.products)
+                                    .values
+                                    .elementAt(index));
+                          },
+                        ),
+                      ),
+                      const OrderResume(),
+                    ],
+                  ),
                 ),
               );
             } else {

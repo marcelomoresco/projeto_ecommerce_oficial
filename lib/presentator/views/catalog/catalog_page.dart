@@ -31,22 +31,20 @@ class CatalogPage extends StatelessWidget {
       ),
       bottomNavigationBar: const CustomBottomAppBar(),
       body: GridView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 26),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 36),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 90,
+            mainAxisSpacing: 120,
             childAspectRatio: 1,
           ),
           shrinkWrap: true,
           itemCount: categoryProducts.length,
           itemBuilder: (context, index) {
-            return SingleChildScrollView(
-              child: SizedBox(
-                height: 50,
-                child: Center(
-                  child: ProductCard(
-                      product: categoryProducts[index], widthSelect: 2.2),
-                ),
+            return SizedBox(
+              height: 310,
+              child: Center(
+                child: ProductCard(
+                    product: categoryProducts[index], widthSelect: 2.2),
               ),
             );
           }),

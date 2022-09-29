@@ -38,7 +38,7 @@ class CustomBottomAppBar extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed("/user");
+                      Navigator.of(context).pushNamed("/profile");
                     },
                     icon: Icon(
                       Icons.person,

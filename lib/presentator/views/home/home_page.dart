@@ -26,96 +26,100 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(
-        title: "Mercadinho do Zé",
-      ),
-      bottomNavigationBar: const CustomBottomAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            BlocBuilder<CategoryBloc, CategoryState>(
-              builder: (context, state) {
-                if (state is CategoryLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is CategoryLoaded) {
-                  return CarouselSlider(
-                    options: CarouselOptions(
-                      aspectRatio: 1.5,
-                      viewportFraction: 0.9,
-                      enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.height,
-                      autoPlay: true,
-                    ),
-                    items: state.categories
-                        .map((category) => HeroCarouselCard(category: category))
-                        .toList(),
-                  );
-                } else {
-                  return const Center(
-                    child: Text("Algo deu muito errado.......!"),
-                  );
-                }
-              },
-            ),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: const CustomAppBar(
+          title: "Mercadinho do Zé",
+        ),
+        bottomNavigationBar: const CustomBottomAppBar(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              BlocBuilder<CategoryBloc, CategoryState>(
+                builder: (context, state) {
+                  if (state is CategoryLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is CategoryLoaded) {
+                    return CarouselSlider(
+                      options: CarouselOptions(
+                        aspectRatio: 1.5,
+                        viewportFraction: 0.9,
+                        enlargeCenterPage: true,
+                        enlargeStrategy: CenterPageEnlargeStrategy.height,
+                        autoPlay: true,
+                      ),
+                      items: Category.categories
+                          .map((category) =>
+                              HeroCarouselCard(category: category))
+                          .toList(),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text("Algo deu muito errado.......!"),
+                    );
+                  }
+                },
+              ),
 
-            //Recomendados
+              //Recomendados
 
-            const SectionTitle(
-              title: "Recomendados",
-            ),
+              const SectionTitle(
+                title: "Recomendados",
+              ),
 
-            // ListView Product
+              // ListView Product
 
-            BlocBuilder<ProductBloc, ProductState>(
-              builder: (context, state) {
-                if (state is ProductLoadingState) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is ProductLoadedState) {
-                  return ProductCarousel(
-                    products: state.products
-                        .where((product) => product.isRecommended)
-                        .toList(),
-                  );
-                } else {
-                  return const Center(
-                    child: Text(
-                        "Algo deu muito errado ao puxar as imagens do Firebase"),
-                  );
-                }
-              },
-            ),
-            const SectionTitle(
-              title: "Mais Populares",
-            ),
+              BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  if (state is ProductLoadingState) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is ProductLoadedState) {
+                    return ProductCarousel(
+                      products: Product.products
+                          .where((product) => product.isRecommended)
+                          .toList(),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text(
+                          "Algo deu muito errado ao puxar as imagens do Firebase"),
+                    );
+                  }
+                },
+              ),
+              const SectionTitle(
+                title: "Mais Populares",
+              ),
 
-            // ListView Product
+              // ListView Product
 
-            BlocBuilder<ProductBloc, ProductState>(
-              builder: (context, state) {
-                if (state is ProductLoadingState) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is ProductLoadedState) {
-                  return ProductCarousel(
-                    products: state.products
-                        .where((product) => product.isPopular)
-                        .toList(),
-                  );
-                } else {
-                  return const Center(
-                    child: Text(
-                        "Algo deu muito errado ao puxar as imagens do Firebase"),
-                  );
-                }
-              },
-            ),
-          ],
+              BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  if (state is ProductLoadingState) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is ProductLoadedState) {
+                    return ProductCarousel(
+                      products: Product.products
+                          .where((product) => product.isPopular)
+                          .toList(),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text(
+                          "Algo deu muito errado ao puxar as imagens do Firebase"),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

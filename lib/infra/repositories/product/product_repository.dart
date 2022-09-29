@@ -11,6 +11,14 @@ class ProductRepository extends BaseProductRepository {
 
   @override
   Stream<List<Product>> getAllProducts() {
+    print(_firebaseFirestore.collection('products'));
+    print("FIREBASE PRODUCT");
+    print("FIREBASE PRODUCT");
+
+    print("FIREBASE PRODUCT");
+    print("FIREBASE PRODUCT");
+    print("FIREBASE PRODUCT");
+
     return _firebaseFirestore
         .collection('products')
         .snapshots()

@@ -18,87 +18,88 @@ class ProductCard extends StatelessWidget {
       },
       child: Stack(
         children: [
-          Column(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width / widthSelect,
-                height: 150,
-                child: Image.network(
-                  product.imageUrl,
-                  fit: BoxFit.cover,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / widthSelect,
+                  height: 120,
+                  child: Image.network(
+                    product.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.name,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                const SizedBox(
+                  height: 5,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.name,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'R\$${product.price.toString()}',
-                    style: const TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                    Text(
+                      'R\$${product.price.toString()}',
+                      style: const TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  BlocBuilder<CartBloc, CartState>(
-                    builder: (context, state) {
-                      if (state is CartLoadingState) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (state is CartLoadedState) {
-                        return ElevatedButton(
-                          onPressed: () {
-                            context
-                                .read<CartBloc>()
-                                .add(AddProductCartEvent(product));
-                            const snackBar = SnackBar(
-                              backgroundColor: Colors.green,
-                              content: Text(
-                                "Adicionado ao Carrinho",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.deepPurple),
-                          child: Container(
-                            width: 130,
-                            child: Row(
-                              children: const [
-                                Icon(Icons.add_circle),
-                                SizedBox(
-                                  width: 4,
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    BlocBuilder<CartBloc, CartState>(
+                      builder: (context, state) {
+                        if (state is CartLoadingState) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state is CartLoadedState) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .read<CartBloc>()
+                                  .add(AddProductCartEvent(product));
+                              const snackBar = SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text(
+                                  "Adicionado ao Carrinho",
+                                  style: TextStyle(color: Colors.white),
                                 ),
-                                Text("Comprar Agora")
-                              ],
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.deepPurple),
+                            child: Container(
+                              width: 130,
+                              child: Row(
+                                children: const [
+                                  Icon(Icons.add_circle),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text("Comprar Agora")
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      } else {
-                        return Text("Algo deu errado!");
-                      }
-                    },
-                  )
-                ],
-              ),
-            ],
+                          );
+                        } else {
+                          return Text("Algo deu errado!");
+                        }
+                      },
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

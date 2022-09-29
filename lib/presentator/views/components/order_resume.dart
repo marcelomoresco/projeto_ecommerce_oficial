@@ -60,27 +60,27 @@ class OrderResume extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 40,
-                    decoration: const BoxDecoration(
-                      color: Colors.deepPurple,
-                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(30)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Total",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .copyWith(color: Colors.white),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22),
                           ),
                           Text(
                             "R\$${state.cart.totalString}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .copyWith(color: Colors.white),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22),
                           ),
                         ],
                       ),

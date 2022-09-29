@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/auth_bloc/auth_bloc.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -18,26 +21,36 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Timer(
         const Duration(seconds: 1), () => Navigator.of(context).pushNamed('/'));
-    return Scaffold(
-      backgroundColor: Colors.deepPurple,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            height: 70,
-            width: 200,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25), color: Colors.white),
-            child: const Text(
-              "Bem-Vindo",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
+    return BlocListener<AuthBloc, AuthState>(
+      listenWhen: (previous, current) => previous.authUser != current.authUser,
+      listener: (context, state) {
+        print("Auth page");
+      },
+      child: Scaffold(
+        backgroundColor: Colors.deepPurple,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: Container(
+                height: 70,
+                width: 200,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Colors.white),
+                child: const Text(
+                  "Bem-Vindo",
+                  style: TextStyle(
+                    color: Colors.deepPurple,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

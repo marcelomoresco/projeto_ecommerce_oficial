@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../cubits/login_cubit/login_cubit.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -21,21 +24,23 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildEmailTextField(),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             _buildPasswordTextField(),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(),
+                shape: const RoundedRectangleBorder(),
                 backgroundColor: Colors.deepPurple,
-                fixedSize: Size(200, 40),
+                fixedSize: const Size(200, 40),
               ),
-              child: Text("Login"),
-              onPressed: () {},
+              child: const Text("Login"),
+              onPressed: () {
+                context.read<LoginCubit>().loginWithEmailAndPassword();
+              },
             ),
           ],
         ),
@@ -47,9 +52,15 @@ class LoginPage extends StatelessWidget {
 class _buildEmailTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (value) {},
-      decoration: const InputDecoration(hintText: "E-mail"),
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (context, state) {
+        return TextField(
+          onChanged: (value) {
+            context.read<LoginCubit>().emailChanged(value);
+          },
+          decoration: const InputDecoration(hintText: "E-mail"),
+        );
+      },
     );
   }
 }
@@ -57,10 +68,16 @@ class _buildEmailTextField extends StatelessWidget {
 class _buildPasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (value) {},
-      decoration: const InputDecoration(hintText: "Senha"),
-      obscureText: true,
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (context, state) {
+        return TextField(
+          onChanged: (value) {
+            context.read<LoginCubit>().passwordChanged(value);
+          },
+          decoration: const InputDecoration(hintText: "Senha"),
+          obscureText: true,
+        );
+      },
     );
   }
 }
