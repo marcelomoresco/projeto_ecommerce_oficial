@@ -1,16 +1,20 @@
-# e_commerce_project_new
+<h1 align="center">App E-commerce feito com Flutter e bloC</h1>
 
-A new Flutter project.
+<p align="center">Esse projeto é um e-commerce feito em Bloc para fins de estudos.</p>
 
-## Getting Started
+<p align="center">Status - Em Desenvolvimento, implementando o firestore nas imagens</p>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+<br>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<!-- GIF-->
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![ezgif-5-ac9a21d30e](https://user-images.githubusercontent.com/85464545/193490405-59bd08f9-5263-4fde-aeec-8563f2681353.gif)
+
+
+
+### Autor
+
+Made with 💜 by Marcelo Moresco👋
+
+[![LinkedIn Badge](https://img.shields.io/badge/-marcelomoresco-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/marcelo-adriel-moresco-a32104179/)](https://www.linkedin.com/in/marcelo-adriel-moresco-a32104179/)
