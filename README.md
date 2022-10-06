@@ -8,9 +8,7 @@
 <br>
 
 <!-- GIF-->
-
-![ezgif-5-ac9a21d30e](https://user-images.githubusercontent.com/85464545/193490405-59bd08f9-5263-4fde-aeec-8563f2681353.gif)
-
+![ezgif com-gif-maker (11)](https://user-images.githubusercontent.com/85464545/194328139-d66b49eb-c9f9-4e22-b973-81f700d09666.gif)
 
 
 ### Autor
